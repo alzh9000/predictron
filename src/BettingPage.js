@@ -41,7 +41,6 @@ class BettingPage extends Component {
 	async loadTron() {
         try {
 		    await this.setBettingContract();
-            await this.walletConnect();
             this.setState({ address: 'Connected', showConnect: false });
         } catch (e) {
             console.log(e);
