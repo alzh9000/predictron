@@ -1,161 +1,229 @@
 .App {
-  text-align: center;
+	text-align: center;
+	/* color: rgb(246, 213, 194); */
+	height: 100%;
+	overflow: hidden;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 100%;
+	max-height: 100%;
+	/* height: 100%;
+	overflow: hidden; */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: rgb(246, 213, 194);
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-#backgroundVideo {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: -1;
-  filter: brightness(40%)
-}
-
-#splash-items {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-#title-splash {
-    color: white;
-}
-
-#get-started-button {
-    width: 200px;
-    height: 40px;
-    border:solid 2px white;
-    border-radius: 5px;
-    background: rgba(255, 255, 255,0);
-    font-size: 16pt;
-    color: white;
-}
-
-#get-started-button:hover {
-    color: lightgray;
-    border:solid 2px lightgray;
-}
-
-#submit-button, #wallet-button {
-    width: 200px;
-    height: 30px;
-    border:solid 2px black;
-    border-radius: 5px;
-    background: rgba(255, 255, 255,0);
-    font-size: 12pt;
-    color: black;
-    padding-bottom: 5px;
-}
-
-#submit-button:hover, #wallet-button:hover {
-    color: rgba(0,0,0,0.8);
-    border:solid 2px rgba(0,0,0,0.8);
-}
-
-#launch-link {
-    color: white;
-    text-decoration: none;
-}
-
-#launch-link:hover {
-    color: lightgray;
-    text-decoration: none;
-}
-
-.formStyle {
-  outline: 0;
-  border-width: 2px;
-  border-color: black;
-  background-color: white;
-  background: transparent;
-  text-align: center;
-  font-size: large;
-  padding-left: 10px;
-  width: 200px;
-}
-
-.formStyle:hover {
-  border-color: solid #555;
-}
-
-#submission-form {
-    text-align: center;
-}
-
-#background {
-    background: url("./utils/bg.jpg") fixed no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    max-height: 100vw;
-}
-
-#dark-logo {
-    padding-top: 10px;
+label {
+	color: rgb(246, 213, 194);
 }
 
 h1 {
-    margin: 0 !important;
+	color: rgb(246, 213, 194);
+	font-size: 20pt;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+#backgroundVideo {
+	width: 100vw;
+	height: 100vh;
+	object-fit: cover;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+	filter: brightness(40%);
+}
+
+#splash-items {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#title-splash {
+	color: rgb(246, 213, 194);
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	filter: brightness(95%);
+}
+
+#get-started-button {
+	width: 200px;
+	height: 45px;
+	border: solid 2px rgb(246, 213, 194);
+	border-radius: 5px;
+	background: rgba(255, 255, 255, 0);
+	font-size: 20pt;
+	color: rgb(246, 213, 194);
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	filter: brightness(95%);
+}
+
+#get-started-button:hover {
+	color: lightgray;
+	border: solid 2px lightgray;
+}
+
+#submit-button,
+#wallet-button {
+	width: 240px;
+	height: 30px;
+	border: solid 2px rgb(246, 213, 194);
+	border-radius: 5px;
+	background: rgba(255, 255, 255, 0);
+	font-size: 12pt;
+	color: rgb(246, 213, 194);
+	padding-bottom: 5px;
+}
+
+#submit-button:hover,
+#wallet-button:hover {
+	color: rgba(0, 0, 0, 0.8);
+	border: solid 2px rgba(0, 0, 0, 0.8);
+}
+
+#launch-link {
+	color: rgb(246, 213, 194);
+	text-decoration: none;
+}
+
+#launch-link:hover {
+	color: darkgray;
+	text-decoration: none;
+}
+
+.formStyle {
+	color: rgb(246, 213, 194);
+	outline: 0;
+	border-width: 2px;
+	border-color: rgb(246, 213, 194);
+	background-color: rgb(246, 213, 194);
+	background: transparent;
+	text-align: center;
+	font-size: large;
+	padding-left: 10px;
+	width: 200px;
+}
+
+.formStyle:hover {
+	border-color: solid #555;
+}
+
+#submission-form {
+	text-align: center;
+}
+
+#background {
+	/* background: url("./utils/bg.jpg") fixed no-repeat; */
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	max-height: 120vw;
+	background: rgb(70, 5, 5);
+	background: linear-gradient(
+		326deg,
+		rgba(70, 5, 5, 1) 9%,
+		rgba(156, 26, 26, 1) 36%,
+		rgba(156, 23, 12, 1) 58%,
+		rgba(92, 21, 15, 1) 83%,
+		rgba(65, 14, 14, 1) 98%
+	);
+	/* filter: brightness(90%) */
+}
+
+#dark-logo {
+	padding-top: 10px;
+}
+
+h1 {
+	margin: 0 !important;
 }
 
 p {
-    color: black;
+	color: rgb(246, 213, 194);
 }
 
-#contract-link, #github-link {
-    color: black;
+#contract-link,
+#github-link {
+	color: rgb(246, 213, 194);
 }
 
 #table-container {
-    padding-left: 5%;
-    padding-right: 5%;
-    overflow: auto;
+	padding-left: 5%;
+	padding-right: 5%;
+	overflow: auto;
+	color: rgb(246, 213, 194);
 }
 
 .title-banner {
-    display: inline-block;
-    align-items: center;
-    margin-top: 8px;
+	display: inline-block;
+	align-items: center;
+	margin-top: 8px;
+}
+
+tr:hover {
+	background-color: #282c34;
+	/* position: sticky; */
+}
+
+table th {
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
+	background-color: #282c34;
+	opacity: 1;
+	z-index: 15;
+	border: 10px solid #282c34;
+}
+
+tbody {
+	position: relative;
+	z-index: 0;
+}
+
+table {
+	position: relative;
+	border-collapse: separate;
+	border-spacing: 0;
 }
