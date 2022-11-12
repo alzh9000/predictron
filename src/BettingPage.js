@@ -30,7 +30,7 @@ class BettingPage extends Component {
         const tronWeb = window.tronWeb;
 		this.bettingContract = await tronWeb
 			.contract()
-			.at('TTA3URRJr4X7VXzTFgpDanv8ZXMKiBn8Sp');
+			.at('TEWs5AFnA8VfvmT8n4o1uKiVUYskW2gequ');
 	}
 
     async walletConnect() {
@@ -40,13 +40,12 @@ class BettingPage extends Component {
 
 	async loadTron() {
         try {
-            await this.walletConnect();
 		    await this.setBettingContract();
-            await this.getRatios(857538);
+            await this.walletConnect();
             this.setState({ address: 'Connected', showConnect: false });
-        } catch {
-            alert("Please make sure you have the TronLink extension installed! \
-                   You can try again using the Connect Wallet button.");
+        } catch (e) {
+            console.log(e);
+            alert("Could not connect to Tron network! Make sure you have TronLink installed, and try again using the Connect Wallet button.");
             this.setState({ address: 'Not Connected', showConnect: true });
         }
 	}
@@ -58,9 +57,10 @@ class BettingPage extends Component {
 			.send({ feeLimit: 100_000_000, callValue: amount });
 	}
 
-    async getRatios(gameID) {
-        const bets = await this.bettingContract.getBets(gameID).call();
+    async getBets(gameIDs) {
+        const bets = await this.bettingContract.getBets(gameIDs).call();
         console.log(bets);
+        return bets;
     }
 
 	handleSubmit(event) {
@@ -82,7 +82,7 @@ class BettingPage extends Component {
 		// to store the games for web purposes
 		let parsedGames = [];
 
-		for (let i = 0; i < 7; i++) {
+		for (let i = 0; i < 1; i++) {
 			let page = i + 1;
 			let real_url = url + page.toString();
 			const response = await axios(real_url);
@@ -95,14 +95,32 @@ class BettingPage extends Component {
 					let extracted_game = [
 						one_game['id'],
 						one_game['home_team']['full_name'],
+                        0,
 						one_game['visitor_team']['full_name'],
+                        0,
 						one_game['date'].slice(0, 10),
-						one_game['status'],
+                        one_game['status'],
 					];
 					parsedGames.push(extracted_game);
 				}
 			}
 		}
+
+        let ids = [];
+
+        for (let i in parsedGames) {
+            ids.push(parsedGames[i][0]);
+        }
+
+        console.log(ids);
+
+
+        const bets = await this.getBets(ids);
+
+        for (let i in parsedGames) {
+            parsedGames[i][2] = window.tronWeb.toDecimal(bets.home[i]) / 1_000_000;
+            parsedGames[i][4] = window.tronWeb.toDecimal(bets.away[i]) / 1_000_000;
+        }
 
 		parsedGames.sort((a, b) => (a[0] > b[0] ? 1 : -1));
 		this.setState({ games: parsedGames });

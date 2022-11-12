@@ -12,6 +12,8 @@ const Game = (parsedGames) => {
 				<td>{oneGame[2]}</td>
 				<td>{oneGame[3]}</td>
 				<td>{oneGame[4]}</td>
+				<td>{oneGame[5]}</td>
+				<td>{oneGame[6]}</td>
 			</tr>
 		);
 	}
@@ -23,7 +25,9 @@ const Game = (parsedGames) => {
 					<tr>
 						<th>ID</th>
 						<th>Away Team</th>
+                        <th>Away Bets</th>
 						<th>Home Team</th>
+                        <th>Home Bets</th>
 						<th>Date</th>
 						<th>Game Status</th>
 					</tr>
