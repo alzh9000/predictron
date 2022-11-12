@@ -114,17 +114,6 @@ class BettingPage extends Component {
 					<h1>Tron Bet</h1>
 					<p>Wallet Status: {this.state.address}</p>
                     { this.state.showConnect ? <this.WalletButton /> : null}
-					<p>
-						Contract address:{'TTA3URRJr4X7VXzTFgpDanv8ZXMKiBn8Sp'}
-						<a
-							id='contract-link'
-							href='https://explorer.pops.one/address/0x8d3f00cabc107d969b09aac7373fced190f42510'
-							target='_blank'
-							rel='noreferrer'
-						>
-							0x8d3f00cabc107d969b09aac7373fced190f42510
-						</a>
-					</p>
 					<form onSubmit={this.handleSubmit}>
 						<label>Game ID</label>
 						<br />
