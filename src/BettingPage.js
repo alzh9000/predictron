@@ -36,9 +36,8 @@ class BettingPage extends Component {
         try {
 		    await this.setBettingContract();
             this.setState({ address: 'Connected', showConnect: false })
-        } catch (e) {
-            console.log("Hello")
-            console.log(e);
+        } catch {
+            alert("Please make sure you have the TronLink extension installed! You can try again using the Connect Wallet button.")
             this.setState({ address: 'Not Connected', showConnect: true })
         }
 	}
