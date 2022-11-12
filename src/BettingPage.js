@@ -17,17 +17,16 @@ class BettingPage extends Component {
 			betting: {},
 			games: [],
 			gameRange: [],
+            showConnect: true,
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.loadMetaMask = this.loadMetaMask.bind(this);
+		this.loadTron = this.loadTron.bind(this);
 	}
 
 	componentDidMount() {
-		// this.loadWeb3();
-		this.loadUserData();
+		this.loadTron();
 		this.determineGames();
-		this.load_tron();
 	}
 	async setBettingContract() {
 		this.bettingContract = await window.tronWeb
@@ -35,44 +34,15 @@ class BettingPage extends Component {
 			.at('TTA3URRJr4X7VXzTFgpDanv8ZXMKiBn8Sp');
 	}
 
-	async load_tron() {
-		await this.setBettingContract();
-	}
-
-	async loadWeb3() {
-		if (window.ethereum) {
-			window.web3 = new Web3(window.ethereum);
-			await window.ethereum.enable();
-		} else if (window.web3) {
-			window.web3 = new Web3(window.web3.currentProvider);
-		} else {
-			window.alert(
-				'Non-Ethereum browser detected. You should consider trying MetaMask!'
-			);
-		}
-	}
-
-	async loadUserData() {
-		/*
-        const web3 = window.web3;
-        // find the network
-        const networkId = await web3.eth.net.getId();
-
-        // find the contract
-        const bettingData = Betting.networks[networkId];
-        if (bettingData) {
-            // const betting = new web3.eth.Contract(Betting.abi, bettingData.address);
-            // this.setState({ betting });
-        } else {
-            window.alert('Betting contract not deployed to detected network.')
+	async loadTron() {
+        try {
+		    await this.setBettingContract();
+            this.setState({ address: 'Connected', showConnect: false })
+        } catch (e) {
+            console.log("Hello")
+            console.log(e);
+            this.setState({ address: 'Not Connected', showConnect: true })
         }
-        */
-	}
-
-	async loadMetaMask() {
-		this.bettingContract = await window.tronWeb
-			.contract()
-			.at('TTA3URRJr4X7VXzTFgpDanv8ZXMKiBn8Sp');
 	}
 
 	// javascript function to call the solidity bet function
@@ -130,6 +100,7 @@ class BettingPage extends Component {
 		});
 	}
 
+
 	render() {
 		return (
 			<div id='background'>
@@ -141,12 +112,10 @@ class BettingPage extends Component {
 						className='title-banner'
 					/>
 					<h1>Tron Bet</h1>
-					<button id='wallet-button' onClick={this.loadMetaMask}>
-						Connect/Switch Wallet
-					</button>
-					<p>Connected wallet address: {this.state.address}</p>
+					<p>Wallet Status: {this.state.address}</p>
+                    { this.state.showConnect ? <this.WalletButton /> : null}
 					<p>
-						Contract address:{' '}
+						Contract address:{'TTA3URRJr4X7VXzTFgpDanv8ZXMKiBn8Sp'}
 						<a
 							id='contract-link'
 							href='https://explorer.pops.one/address/0x8d3f00cabc107d969b09aac7373fced190f42510'
@@ -154,17 +123,6 @@ class BettingPage extends Component {
 							rel='noreferrer'
 						>
 							0x8d3f00cabc107d969b09aac7373fced190f42510
-						</a>
-					</p>
-					<p>
-						Github link:{' '}
-						<a
-							id='github-link'
-							href='https://github.com/jeremyzhang1/peer-sports-betting'
-							target='_blank'
-							rel='noreferrer'
-						>
-							https://github.com/jeremyzhang1/peer-sports-betting
 						</a>
 					</p>
 					<form onSubmit={this.handleSubmit}>
@@ -209,6 +167,14 @@ class BettingPage extends Component {
 			</div>
 		);
 	}
+
+    WalletButton = () => (
+        <button id='wallet-button' onClick={this.loadTron}>
+            Connect/Switch Wallet
+        </button>
+    )
+
 }
+
 
 export default BettingPage;
