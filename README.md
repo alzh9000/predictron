@@ -1,3 +1,6 @@
+# Predictron - the future of prediction based entertainment on Tron!
+
+# OLD:
 # Peer to Peer Sports Betting Dapp
 
 ![Landing Page](https://github.com/jeremyzhang1/peer-sports-betting/blob/main/src/utils/LandingPage.PNG?raw=true)
@@ -8,9 +11,11 @@ To run the dapp on the web, go to https://blockchain-bball.web.app.
 
 To view the video demo, go to https://youtu.be/dYdrdbDB2s0.
 
-To view slides, go to Blockchain Basketball Betting - Harmony Hackathon Presentation.pdf.
+To view slides, go to Tron Bet - Harmony Hackathon Presentation.pdf.
 
 You will need to connect a MetaMask wallet and connect it to the Harmony testnet. [Here](https://docs.harmony.one/home/network/wallets/browser-extensions-wallets/metamask-wallet) are some instructions from Harmony that can get you started.
+
+You will need to use a TronLink wallet and connect it to the TronLink Nile testnet. Go to [Tron documenation](https://developers.tron.network/docs/build-a-web3-app#install) and follow the instructions to install the TronLink extension. Then, create a wallet on TronLink and connect your wallet to the Nile testnet, so you can use our website with Tron.
 
 ## About
 Contract address: [0x8d3f00cabc107d969b09aac7373fced190f42510](https://explorer.pops.one/address/0x8d3f00cabc107d969b09aac7373fced190f42510)
@@ -20,6 +25,11 @@ A project for the [Harmony University Hackathon](https://taikai.network/en/harmo
 Made with ❤ by Jeremy ([@jeremyzhang01](https://twitter.com/jeremyzhang01)), Albert ([@AlbertWZhang](https://twitter.com/AlbertWZhang)), Charles ([@charlesma_20](https://twitter.com/charlesma_20)), and Ash ([@ashlan_ahmed](https://twitter.com/ashlan_ahmed))
 
 ## Testnet Deployment Setup
+Go to https://developers.tron.network/docs/build-a-web3-app#install and follow the instructions to install TronLink extension. Then, create a wallet on TronLink so you can use our website with Tron. To test it, you can connect your wallet to the Nile testnet.
+
+ Run `npm install tronweb` 
+
+
 First, create a file called `.env` to store the mnemonic.
 
 Then, run the command `npx mnemonic` in the terminal to generate a mnemonic. Copy and paste this into `.env`, so that it now has one line in the form
