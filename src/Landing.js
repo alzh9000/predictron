@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HarmonyBasketball from './utils/tron_hype.mp4';
-import HarmonyBasketballLogo from './utils/tron_bet_high_resolution.png';
+import HarmonyBasketballLogo from './utils/predictron_bet_high_resolution.png';
 import './App.css';
 
 const Landing = () => {
@@ -12,7 +12,7 @@ const Landing = () => {
 			</video>
 			<div id='splash-items'>
 				<img src={HarmonyBasketballLogo} alt='logo' width='50%' />
-				<h1 id='title-splash'>Tron Bet</h1>
+				<h1 id='title-splash'>PredicTron</h1>
 				<br></br>
 				<button id='get-started-button'>
 					<Link id='launch-link' to='/app'>

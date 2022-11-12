@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Web3 from 'web3';
 import Game from './Game';
-import Betting from './contractCode/Betting.json';
-import HarmonyBasketballLogoDark from './utils/tron_bet_high_resolution.png';
+import HarmonyBasketballLogoDark from './utils/predictron_bet_high_resolution.png';
 import './App.css';
 
 class BettingPage extends Component {
@@ -114,6 +112,7 @@ class BettingPage extends Component {
 					<h1>Tron Bet</h1>
 					<p>Wallet Status: {this.state.address}</p>
                     { this.state.showConnect ? <this.WalletButton /> : null}
+					<p>Connected wallet address: {this.state.address}</p>
 					<form onSubmit={this.handleSubmit}>
 						<label>Game ID</label>
 						<br />
