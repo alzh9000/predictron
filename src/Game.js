@@ -25,9 +25,9 @@ const Game = (parsedGames) => {
 					<tr>
 						<th>ID</th>
 						<th>Away Team</th>
-                        <th>Away Bets</th>
+						<th>Total TRX Bet on Home</th>
 						<th>Home Team</th>
-                        <th>Home Bets</th>
+						<th>Total TRX Bet on Away</th>
 						<th>Date</th>
 						<th>Game Status</th>
 					</tr>
