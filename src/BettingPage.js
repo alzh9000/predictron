@@ -14,41 +14,42 @@ class BettingPage extends Component {
 			betting: {},
 			games: [],
 			gameRange: [],
-            showConnect: true,
+			showConnect: true,
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.loadTron = this.loadTron.bind(this);
-
-        this.loadTron();
 	}
 
 	componentDidMount() {
 		this.loadTron();
-		this.determineGames();
 	}
 
 	async setBettingContract() {
-        const tronWeb = window.tronWeb;
+		const tronWeb = window.tronWeb;
 		this.bettingContract = await tronWeb
 			.contract()
 			.at('TEWs5AFnA8VfvmT8n4o1uKiVUYskW2gequ');
 	}
 
-    async walletConnect() {
-        const tronLink = window.tronLink;
-        await tronLink.request({method: 'tron_requestAccounts'});
-    }
+	async walletConnect() {
+		const tronLink = window.tronLink;
+		await tronLink.request({ method: 'tron_requestAccounts' });
+	}
 
 	async loadTron() {
-        try {
-		    await this.setBettingContract();
-            this.setState({ address: 'Connected', showConnect: false });
-        } catch (e) {
-            console.log(e);
-            alert("Could not connect to Tron network! Make sure you have TronLink installed, and try again using the Connect Wallet button.");
-            this.setState({ address: 'Not Connected', showConnect: true });
-        }
+		try {
+			await this.setBettingContract();
+			await this.determineGames();
+			this.setState({ address: 'Connected', showConnect: false });
+		} catch (e) {
+			console.log(e);
+			console.log('hello');
+			alert(
+				'Could not connect to Tron network! Make sure you have TronLink installed, and try again using the Connect Wallet button.'
+			);
+			this.setState({ address: 'Not Connected', showConnect: true });
+		}
 	}
 
 	// javascript function to call the solidity bet function
@@ -58,11 +59,11 @@ class BettingPage extends Component {
 			.send({ feeLimit: 100_000_000, callValue: amount });
 	}
 
-    async getBets(gameIDs) {
-        const bets = await this.bettingContract.getBets(gameIDs).call();
-        console.log(bets);
-        return bets;
-    }
+	async getBets(gameIDs) {
+		const bets = await this.bettingContract.getBets(gameIDs).call();
+		console.log(bets);
+		return bets;
+	}
 
 	handleSubmit(event) {
 		event.preventDefault();
@@ -96,32 +97,31 @@ class BettingPage extends Component {
 					let extracted_game = [
 						one_game['id'],
 						one_game['home_team']['full_name'],
-                        0,
+						0,
 						one_game['visitor_team']['full_name'],
-                        0,
+						0,
 						one_game['date'].slice(0, 10),
-                        one_game['status'],
+						one_game['status'],
 					];
 					parsedGames.push(extracted_game);
 				}
 			}
 		}
 
-        let ids = [];
+		let ids = [];
 
-        for (let i in parsedGames) {
-            ids.push(parsedGames[i][0]);
-        }
+		for (let i in parsedGames) {
+			ids.push(parsedGames[i][0]);
+		}
 
-        console.log(ids);
+		console.log(ids);
 
+		const bets = await this.getBets(ids);
 
-        const bets = await this.getBets(ids);
-
-        for (let i in parsedGames) {
-            parsedGames[i][2] = window.tronWeb.toDecimal(bets.home[i]) / 1_000_000;
-            parsedGames[i][4] = window.tronWeb.toDecimal(bets.away[i]) / 1_000_000;
-        }
+		for (let i in parsedGames) {
+			parsedGames[i][2] = window.tronWeb.toDecimal(bets.home[i]) / 1_000_000;
+			parsedGames[i][4] = window.tronWeb.toDecimal(bets.away[i]) / 1_000_000;
+		}
 
 		parsedGames.sort((a, b) => (a[0] > b[0] ? 1 : -1));
 		this.setState({ games: parsedGames });
@@ -129,7 +129,6 @@ class BettingPage extends Component {
 			gameRange: [parsedGames[0][0], parsedGames[parsedGames.length - 1][0]],
 		});
 	}
-
 
 	render() {
 		return (
@@ -143,7 +142,7 @@ class BettingPage extends Component {
 					/>
 					<h1>PredicTron</h1>
 					<p>Wallet Status: {this.state.address}</p>
-                    { this.state.showConnect ? <this.WalletButton /> : null}
+					{this.state.showConnect ? <this.WalletButton /> : null}
 					<form onSubmit={this.handleSubmit}>
 						<label>Game ID</label>
 						<br />
@@ -187,12 +186,11 @@ class BettingPage extends Component {
 		);
 	}
 
-    WalletButton = () => (
-        <button id='wallet-button' onClick={this.loadTron}>
-            Connect/Switch Wallet
-        </button>
-    )
+	WalletButton = () => (
+		<button id='wallet-button' onClick={this.loadTron}>
+			Connect/Switch Wallet
+		</button>
+	);
 }
-
 
 export default BettingPage;
