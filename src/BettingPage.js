@@ -10,7 +10,6 @@ class BettingPage extends Component {
 	constructor() {
 		super();
 		this.state = {
-			web3: '',
 			address: 'Not Connected',
 			betting: {},
 			games: [],
@@ -26,6 +25,7 @@ class BettingPage extends Component {
 		this.loadTron();
 		this.determineGames();
 	}
+
 	async setBettingContract() {
 		this.bettingContract = await window.tronWeb
 			.contract()
@@ -112,7 +112,6 @@ class BettingPage extends Component {
 					<h1>Tron Bet</h1>
 					<p>Wallet Status: {this.state.address}</p>
                     { this.state.showConnect ? <this.WalletButton /> : null}
-					<p>Connected wallet address: {this.state.address}</p>
 					<form onSubmit={this.handleSubmit}>
 						<label>Game ID</label>
 						<br />
@@ -161,7 +160,6 @@ class BettingPage extends Component {
             Connect/Switch Wallet
         </button>
     )
-
 }
 
 
