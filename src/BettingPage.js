@@ -42,9 +42,11 @@ class BettingPage extends Component {
         try {
             await this.walletConnect();
 		    await this.setBettingContract();
+            await this.getRatios(857538);
             this.setState({ address: 'Connected', showConnect: false });
         } catch {
-            alert("Please make sure you have the TronLink extension installed! You can try again using the Connect Wallet button.");
+            alert("Please make sure you have the TronLink extension installed! \
+                   You can try again using the Connect Wallet button.");
             this.setState({ address: 'Not Connected', showConnect: true });
         }
 	}
@@ -56,8 +58,8 @@ class BettingPage extends Component {
 			.send({ feeLimit: 100_000_000, callValue: amount });
 	}
 
-    async get_ratios() {
-        const bets = await this.bettingContract.getBets();
+    async getRatios(gameID) {
+        const bets = await this.bettingContract.getBets(gameID).call();
         console.log(bets);
     }
 
@@ -66,11 +68,11 @@ class BettingPage extends Component {
 		this.bet(
 			event.target.team.value,
 			event.target.gameid.value,
-			// Multiple betamount by 1000000 to convert from TRX to SUN
-			event.target.betamount.value * 1000000
+			// Multiple betamount by 1,000,000 to convert from TRX to SUN
+			event.target.betamount.value * 1_000_000
 		);
 		alert(
-			'Bet Submitted -- A MetaMask window will appear. Please verify the contract address and approve the transation.'
+			'Bet Submitted -- A TronLink window will appear. Please verify the contract address and approve the transation.'
 		);
 	}
 
@@ -120,7 +122,7 @@ class BettingPage extends Component {
 						height='82px'
 						className='title-banner'
 					/>
-					<h1>Tron Bet</h1>
+					<h1>PredicTron</h1>
 					<p>Wallet Status: {this.state.address}</p>
                     { this.state.showConnect ? <this.WalletButton /> : null}
 					<form onSubmit={this.handleSubmit}>
