@@ -3,7 +3,7 @@ import axios from 'axios';
 import Web3 from 'web3';
 import Game from './Game';
 import Betting from './contractCode/Betting.json';
-import HarmonyBasketballLogoDark from './utils/tron_bet_high_resolution.png';
+import HarmonyBasketballLogoDark from './utils/predictron_bet_high_resolution.png';
 import './App.css';
 
 class BettingPage extends Component {
@@ -140,7 +140,7 @@ class BettingPage extends Component {
 						height='82px'
 						className='title-banner'
 					/>
-					<h1>Tron Bet</h1>
+					<h1>PredicTron</h1>
 					<button id='wallet-button' onClick={this.loadMetaMask}>
 						Connect/Switch Wallet
 					</button>
