@@ -19,6 +19,8 @@ class BettingPage extends Component {
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.loadTron = this.loadTron.bind(this);
+
+        this.loadTron();
 	}
 
 	componentDidMount() {
