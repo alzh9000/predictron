@@ -27,13 +27,20 @@ class BettingPage extends Component {
 	}
 
 	async setBettingContract() {
-		this.bettingContract = await window.tronWeb
+        const tronWeb = window.tronWeb;
+		this.bettingContract = await tronWeb
 			.contract()
 			.at('TTA3URRJr4X7VXzTFgpDanv8ZXMKiBn8Sp');
 	}
 
+    async walletConnect() {
+        const tronLink = window.tronLink;
+        await tronLink.request({method: 'tron_requestAccounts'});
+    }
+
 	async loadTron() {
         try {
+            await this.walletConnect();
 		    await this.setBettingContract();
             this.setState({ address: 'Connected', showConnect: false })
         } catch {
@@ -48,6 +55,11 @@ class BettingPage extends Component {
 			.bet(team, gameID)
 			.send({ feeLimit: 100_000_000, callValue: amount });
 	}
+
+    async get_ratios() {
+        const bets = await this.bettingContract.getBets();
+        console.log(bets);
+    }
 
 	handleSubmit(event) {
 		event.preventDefault();
