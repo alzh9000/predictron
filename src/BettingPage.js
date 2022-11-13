@@ -37,6 +37,7 @@ class BettingPage extends Component {
 		await tronLink.request({ method: 'tron_requestAccounts' });
 	}
 
+	// Connects to TRON Nile testnet
 	async loadTRON() {
 		try {
 			await this.setBettingContract();
