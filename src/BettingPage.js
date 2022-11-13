@@ -87,7 +87,7 @@ class BettingPage extends Component {
 	async determineGames() {
         const tronWeb = window.tronWeb;
 		const url =
-			'https://www.balldontlie.io/api/v1/games/?seasons[]=2022&per_page=100&start_date=2022-01-01&page=';
+			'https://www.balldontlie.io/api/v1/games/?seasons[]=2022&per_page=100&start_date=2022-11-01&page=';
 		// to store the games for web purposes
 		let parsedGames = [];
         let counter = 0;
@@ -124,8 +124,8 @@ class BettingPage extends Component {
             for (let j = start; j < counter; ++j) {
                 const homeBets = tronWeb.toDecimal(bets.home[j - start]);
                 const awayBets = tronWeb.toDecimal(bets.away[j - start]);
-                parsedGames[j][2] = tronWeb.fromSun(homeBets);
-                parsedGames[j][4] = tronWeb.fromSun(awayBets);
+                parsedGames[j][4] = tronWeb.fromSun(homeBets);
+                parsedGames[j][2] = tronWeb.fromSun(awayBets);
             }
 		}
 
