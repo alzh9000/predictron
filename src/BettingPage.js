@@ -142,7 +142,7 @@ class BettingPage extends Component {
 					<img
 						src={HarmonyBasketballLogoDark}
 						alt=''
-						height='82px'
+						height='120px'
 						className='title-banner'
 					/>
 					<h1>PredicTron</h1>
