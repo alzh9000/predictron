@@ -86,23 +86,23 @@ class BettingPage extends Component {
 
 	async determineGames() {
         const tronWeb = window.tronWeb;
-		let url =
+		const url =
 			'https://www.balldontlie.io/api/v1/games/?seasons[]=2022&per_page=100&start_date=2022-01-01&page=';
 		// to store the games for web purposes
 		let parsedGames = [];
         let counter = 0;
 
 		for (let i = 0; i < 7; i++) {
-			let page = i + 1;
-			let real_url = url + page.toString();
+			const page = i + 1;
+			const real_url = url + page.toString();
 			const response = await axios(real_url);
-			let gameArr = response.data.data;
-			let gameLen = gameArr.length;
+			const gameArr = response.data.data;
+			const gameLen = gameArr.length;
+            const start = counter;
             let ids = []
-            let start = counter;
 			for (let j = 0; j < gameLen; j++) {
 				//take one game and extract specific data points
-				let one_game = gameArr[j];
+				const one_game = gameArr[j];
 				if (one_game['status'] !== 'Final') {
 					let extracted_game = [
 						one_game['id'],
