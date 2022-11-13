@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Game from './Game';
-import HarmonyBasketballLogoDark from './utils/predictron_bet_high_resolution.png';
+import tronBasketballLogoDark from './utils/predictron_bet_high_resolution.png';
 import './App.css';
 
 class BettingPage extends Component {
@@ -66,31 +66,31 @@ class BettingPage extends Component {
 	}
 
 	async handleSubmit(event) {
-        const tronWeb = window.tronWeb;
+		const tronWeb = window.tronWeb;
 		event.preventDefault();
 		alert(
 			'Bet Submitted -- A TronLink window will appear. Please verify the contract address and approve the transation.'
 		);
 		try {
-            await this.bet(
-                event.target.team.value,
-                event.target.gameid.value,
-                // Multiple betamount by 1,000,000 to convert from TRX to SUN
-                tronWeb.toSun(event.target.betamount.value),
-            );
-            window.location.reload();
-        } catch {
-            alert('Your bet has not gone through!');
-        }
+			await this.bet(
+				event.target.team.value,
+				event.target.gameid.value,
+				// Multiple betamount by 1,000,000 to convert from TRX to SUN
+				tronWeb.toSun(event.target.betamount.value)
+			);
+			window.location.reload();
+		} catch {
+			alert('Your bet has not gone through!');
+		}
 	}
 
 	async determineGames() {
-        const tronWeb = window.tronWeb;
+		const tronWeb = window.tronWeb;
 		const url =
 			'https://www.balldontlie.io/api/v1/games/?seasons[]=2022&per_page=100&start_date=2022-01-01&page=';
 		// to store the games for web purposes
 		let parsedGames = [];
-        let counter = 0;
+		let counter = 0;
 
 		for (let i = 0; i < 7; i++) {
 			const page = i + 1;
@@ -98,8 +98,8 @@ class BettingPage extends Component {
 			const response = await axios(real_url);
 			const gameArr = response.data.data;
 			const gameLen = gameArr.length;
-            const start = counter;
-            let ids = []
+			const start = counter;
+			let ids = [];
 			for (let j = 0; j < gameLen; j++) {
 				//take one game and extract specific data points
 				const one_game = gameArr[j];
@@ -114,19 +114,19 @@ class BettingPage extends Component {
 						one_game['status'],
 					];
 					parsedGames.push(extracted_game);
-                    ids.push(one_game['id']);
-                    ++counter;
+					ids.push(one_game['id']);
+					++counter;
 				}
 			}
 
-            const bets = await this.getBets(ids);
+			const bets = await this.getBets(ids);
 
-            for (let j = start; j < counter; ++j) {
-                const homeBets = tronWeb.toDecimal(bets.home[j - start]);
-                const awayBets = tronWeb.toDecimal(bets.away[j - start]);
-                parsedGames[j][2] = tronWeb.fromSun(homeBets);
-                parsedGames[j][4] = tronWeb.fromSun(awayBets);
-            }
+			for (let j = start; j < counter; ++j) {
+				const homeBets = tronWeb.toDecimal(bets.home[j - start]);
+				const awayBets = tronWeb.toDecimal(bets.away[j - start]);
+				parsedGames[j][2] = tronWeb.fromSun(homeBets);
+				parsedGames[j][4] = tronWeb.fromSun(awayBets);
+			}
 		}
 
 		parsedGames.sort((a, b) => (a[0] > b[0] ? 1 : -1));
@@ -141,7 +141,7 @@ class BettingPage extends Component {
 			<div id='background'>
 				<div id='submission-form'>
 					<img
-						src={HarmonyBasketballLogoDark}
+						src={tronBasketballLogoDark}
 						alt=''
 						height='120px'
 						className='title-banner'

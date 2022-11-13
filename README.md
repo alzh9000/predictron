@@ -11,16 +11,16 @@ To run the dapp on the web, go to https://blockchain-bball.web.app.
 
 To view the video demo, go to https://youtu.be/dYdrdbDB2s0.
 
-To view slides, go to PredicTron - Harmony Hackathon Presentation.pdf.
+To view slides, go to PredicTron - tron Hackathon Presentation.pdf.
 
-You will need to connect a MetaMask wallet and connect it to the Harmony testnet. [Here](https://docs.harmony.one/home/network/wallets/browser-extensions-wallets/metamask-wallet) are some instructions from Harmony that can get you started.
+You will need to connect a MetaMask wallet and connect it to the tron testnet. [Here](https://docs.tron.one/home/network/wallets/browser-extensions-wallets/metamask-wallet) are some instructions from tron that can get you started.
 
 You will need to use a TronLink wallet and connect it to the TronLink Nile testnet. Go to [Tron documenation](https://developers.tron.network/docs/build-a-web3-app#install) and follow the instructions to install the TronLink extension. Then, create a wallet on TronLink and connect your wallet to the Nile testnet, so you can use our website with Tron.
 
 ## About
 Contract address: [0x8d3f00cabc107d969b09aac7373fced190f42510](https://explorer.pops.one/address/0x8d3f00cabc107d969b09aac7373fced190f42510)
 
-A project for the [Harmony University Hackathon](https://taikai.network/en/harmonyprotocol/hackathons/hackthefuture/overview).
+A project for the [tron University Hackathon](https://taikai.network/en/tronprotocol/hackathons/hackthefuture/overview).
 
 Made with ❤ by Jeremy ([@jeremyzhang01](https://twitter.com/jeremyzhang01)), Albert ([@AlbertWZhang](https://twitter.com/AlbertWZhang)), Charles ([@charlesma_20](https://twitter.com/charlesma_20)), and Ash ([@ashlan_ahmed](https://twitter.com/ashlan_ahmed))
 
@@ -36,11 +36,11 @@ Then, run the command `npx mnemonic` in the terminal to generate a mnemonic. Cop
 ```
 MNEMONIC = 'a lot of words go here'
 ```
-Then, you want to figure out what the wallet addresses are based on your given mnemonic. To do so, run `truffle console --network harmony_testnet`
+Then, you want to figure out what the wallet addresses are based on your given mnemonic. To do so, run `truffle console --network tron_testnet`
 
-Once the truffle development console prompt displays, run `accounts`, which will display a list of accounts. Make note of the first account, and the fact that it begins with `0x`. Take this account address and put it in the search bar [here](https://explorer.pops.one/) to get the equivalent Harmony ONE address, which begins with `one1`. Go to the Harmony ONE faucet [here](https://faucet.pops.one/) and paste in the Harmony ONE address and request test tokens.
+Once the truffle development console prompt displays, run `accounts`, which will display a list of accounts. Make note of the first account, and the fact that it begins with `0x`. Take this account address and put it in the search bar [here](https://explorer.pops.one/) to get the equivalent tron ONE address, which begins with `one1`. Go to the tron ONE faucet [here](https://faucet.pops.one/) and paste in the tron ONE address and request test tokens.
 
-Now that your account has test tokens, you can deploy the smart contracts. To deploy the smart contracts, run `truffle migrate --reset --network harmony_testnet`
+Now that your account has test tokens, you can deploy the smart contracts. To deploy the smart contracts, run `truffle migrate --reset --network tron_testnet`
 
 This project uses [Truffle](https://trufflesuite.com/truffle/)
 
