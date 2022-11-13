@@ -88,13 +88,16 @@ class BettingPage extends Component {
 			'https://www.balldontlie.io/api/v1/games/?seasons[]=2022&per_page=100&start_date=2022-01-01&page=';
 		// to store the games for web purposes
 		let parsedGames = [];
+        let counter = 0;
 
-		for (let i = 0; i < 1; i++) {
+		for (let i = 0; i < 7; i++) {
 			let page = i + 1;
 			let real_url = url + page.toString();
 			const response = await axios(real_url);
 			let gameArr = response.data.data;
 			let gameLen = gameArr.length;
+            let ids = []
+            let start = counter;
 			for (let j = 0; j < gameLen; j++) {
 				//take one game and extract specific data points
 				let one_game = gameArr[j];
@@ -109,23 +112,17 @@ class BettingPage extends Component {
 						one_game['status'],
 					];
 					parsedGames.push(extracted_game);
+                    ids.push(one_game['id']);
+                    ++counter;
 				}
 			}
-		}
 
-		let ids = [];
+            const bets = await this.getBets(ids);
 
-		for (let i in parsedGames) {
-			ids.push(parsedGames[i][0]);
-		}
-
-		console.log(ids);
-
-		const bets = await this.getBets(ids);
-
-		for (let i in parsedGames) {
-			parsedGames[i][2] = window.tronWeb.toDecimal(bets.home[i]) / 1_000_000;
-			parsedGames[i][4] = window.tronWeb.toDecimal(bets.away[i]) / 1_000_000;
+            for (let j = start; j < counter; ++j) {
+                parsedGames[j][2] = window.tronWeb.toDecimal(bets.home[j - start]) / 1_000_000;
+                parsedGames[j][4] = window.tronWeb.toDecimal(bets.away[j - start]) / 1_000_000;
+            }
 		}
 
 		parsedGames.sort((a, b) => (a[0] > b[0] ? 1 : -1));
