@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity =0.5.0;
+pragma solidity =0.5.4;
 
 contract Betting {
-    string public name = "Peer to Peer Basketball Betting App";
+    string public name = "Peer to Peer Sports Prediction App";
     address public owner;
     uint256 public minimumBet;
 
@@ -30,8 +30,7 @@ contract Betting {
     mapping(uint256 => Game) public games;
 
     constructor() public {
-        // minimumBet is 1e14 wei corresponding to 0.0001 ether
-        minimumBet = 1e14;
+        minimumBet = 1;
         owner = msg.sender;
     }
 
@@ -59,6 +58,17 @@ contract Betting {
         }
         return false;
     }
+    
+    // Costly function to get the total bets on a given list of game IDs. Not meant to be called in contract code.
+    function getBets(uint256[] memory _gameIDs) public view returns (uint256[100]memory away, uint256[100] memory home) {
+        require(_gameIDs.length <= 100);
+        
+        for (uint256 i = 0; i < _gameIDs.length; ++i) {
+            away[i] = games[_gameIDs[i]].totalBetsAway;
+            home[i] = games[_gameIDs[i]].totalBetsHome;
+        }
+        return (away, home);
+    }
 
     function bet(uint8 _teamSelected, uint256 _gameID) public payable {
         // Check that the player (person calling this contract) does not exist (meaning that person hasn't bet yet)
@@ -84,6 +94,7 @@ contract Betting {
         require(msg.sender == owner, "caller must be the owner");
 
         // Create a temporary in memory array with fixed size of 1000 to store the winners, so there can be at most 1000000 winners
+        // This is inefficient but easy to code for the hackathon -- we could just loop over twice for production
         address payable[1000000] memory winners;
 
         uint256 count = 0; // This is the count for the number of winners
