@@ -29,7 +29,7 @@ const Game = (parsedGames) => {
 						<th>Away Team</th>
 						<th>Total TRX Bet on Away</th>
 						<th>Date</th>
-						<th>Game Status</th>
+						<th>Game Time</th>
 					</tr>
 				</thead>
 				<tbody>{parsedGames.map(singleGame)}</tbody>

@@ -46,7 +46,7 @@ class BettingPage extends Component {
 			console.log(e);
 			console.log('hello');
 			alert(
-				'Could not connect to Tron network! Make sure you have TronLink installed, and try again using the Connect Wallet button.'
+				'Could not connect to Tron network! Make sure you have TronLink installed and try again using the Connect Wallet button.'
 			);
 			this.setState({ address: 'Not Connected', showConnect: true });
 		}
@@ -66,6 +66,7 @@ class BettingPage extends Component {
 	}
 
 	async handleSubmit(event) {
+        const tronWeb = window.tronWeb;
 		event.preventDefault();
 		alert(
 			'Bet Submitted -- A TronLink window will appear. Please verify the contract address and approve the transation.'
@@ -75,7 +76,7 @@ class BettingPage extends Component {
                 event.target.team.value,
                 event.target.gameid.value,
                 // Multiple betamount by 1,000,000 to convert from TRX to SUN
-                event.target.betamount.value * 1_000_000
+                tronWeb.toSun(event.target.betamount.value),
             );
             window.location.reload();
         } catch {
@@ -84,6 +85,7 @@ class BettingPage extends Component {
 	}
 
 	async determineGames() {
+        const tronWeb = window.tronWeb;
 		let url =
 			'https://www.balldontlie.io/api/v1/games/?seasons[]=2022&per_page=100&start_date=2022-01-01&page=';
 		// to store the games for web purposes
@@ -120,8 +122,10 @@ class BettingPage extends Component {
             const bets = await this.getBets(ids);
 
             for (let j = start; j < counter; ++j) {
-                parsedGames[j][2] = window.tronWeb.toDecimal(bets.home[j - start]) / 1_000_000;
-                parsedGames[j][4] = window.tronWeb.toDecimal(bets.away[j - start]) / 1_000_000;
+                const homeBets = tronWeb.toDecimal(bets.home[j - start]);
+                const awayBets = tronWeb.toDecimal(bets.away[j - start]);
+                parsedGames[j][2] = tronWeb.fromSun(homeBets);
+                parsedGames[j][4] = tronWeb.fromSun(awayBets);
             }
 		}
 
