@@ -58,11 +58,15 @@ contract Betting {
         }
         return false;
     }
-    
-    // Costly function to get the total bets on a given list of game IDs. Not meant to be called in contract code.
-    function getBets(uint256[] memory _gameIDs) public view returns (uint256[100]memory away, uint256[100] memory home) {
+
+    // Costly function to get the total amount of money bet for home and away on a given list of game IDs. Not meant to be called in contract code.
+    function getBets(uint256[] memory _gameIDs)
+        public
+        view
+        returns (uint256[100] memory away, uint256[100] memory home)
+    {
         require(_gameIDs.length <= 100);
-        
+
         for (uint256 i = 0; i < _gameIDs.length; ++i) {
             away[i] = games[_gameIDs[i]].totalBetsAway;
             home[i] = games[_gameIDs[i]].totalBetsHome;
