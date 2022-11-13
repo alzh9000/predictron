@@ -18,11 +18,11 @@ class BettingPage extends Component {
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.loadTron = this.loadTron.bind(this);
+		this.loadTRON = this.loadTRON.bind(this);
 	}
 
 	componentDidMount() {
-		this.loadTron();
+		this.loadTRON();
 	}
 
 	async setBettingContract() {
@@ -37,7 +37,7 @@ class BettingPage extends Component {
 		await tronLink.request({ method: 'tron_requestAccounts' });
 	}
 
-	async loadTron() {
+	async loadTRON() {
 		try {
 			await this.setBettingContract();
 			await this.determineGames();
@@ -46,7 +46,7 @@ class BettingPage extends Component {
 			console.log(e);
 			console.log('hello');
 			alert(
-				'Could not connect to Tron network! Make sure you have TronLink installed and try again using the Connect Wallet button.'
+				'Could not connect to TRON network! Make sure you have TRONLink installed and try again using the Connect Wallet button.'
 			);
 			this.setState({ address: 'Not Connected', showConnect: true });
 		}
@@ -69,7 +69,7 @@ class BettingPage extends Component {
 		const tronWeb = window.tronWeb;
 		event.preventDefault();
 		alert(
-			'Bet Submitted -- A TronLink window will appear. Please verify the contract address and approve the transation.'
+			'Bet Submitted -- A TRONLink window will appear. Please verify the contract address and approve the transation.'
 		);
 		try {
 			await this.bet(
@@ -146,7 +146,7 @@ class BettingPage extends Component {
 						height='120px'
 						className='title-banner'
 					/>
-					<h1>PredicTron</h1>
+					<h1>PredicTRON</h1>
 					<p>Wallet Status: {this.state.address}</p>
 					{this.state.showConnect ? <this.WalletButton /> : null}
 					<form onSubmit={this.handleSubmit}>
@@ -193,7 +193,7 @@ class BettingPage extends Component {
 	}
 
 	WalletButton = () => (
-		<button id='wallet-button' onClick={this.loadTron}>
+		<button id='wallet-button' onClick={this.loadTRON}>
 			Connect/Switch Wallet
 		</button>
 	);

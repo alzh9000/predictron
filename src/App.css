@@ -86,6 +86,7 @@ h1 {
 	color: rgb(246, 213, 194);
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 	filter: brightness(95%);
+	font-size: 32pt;
 }
 
 #get-started-button {

@@ -12,7 +12,7 @@ const Landing = () => {
 			</video>
 			<div id='splash-items'>
 				<img src={tronBasketballLogo} alt='logo' width='50%' />
-				<h1 id='title-splash'>PredicTron</h1>
+				<h1 id='title-splash'>PredicTRON</h1>
 				<br></br>
 				<button id='get-started-button'>
 					<Link id='launch-link' to='/app'>
