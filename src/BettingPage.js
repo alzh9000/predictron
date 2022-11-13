@@ -54,7 +54,7 @@ class BettingPage extends Component {
 
 	// javascript function to call the solidity bet function
 	async bet(team, gameID, amount) {
-		await this.bettingContract
+		return await this.bettingContract
 			.bet(team, gameID)
 			.send({ feeLimit: 100_000_000, callValue: amount });
 	}
@@ -65,17 +65,22 @@ class BettingPage extends Component {
 		return bets;
 	}
 
-	handleSubmit(event) {
+	async handleSubmit(event) {
 		event.preventDefault();
-		this.bet(
-			event.target.team.value,
-			event.target.gameid.value,
-			// Multiple betamount by 1,000,000 to convert from TRX to SUN
-			event.target.betamount.value * 1_000_000
-		);
 		alert(
 			'Bet Submitted -- A TronLink window will appear. Please verify the contract address and approve the transation.'
 		);
+		try {
+            await this.bet(
+                event.target.team.value,
+                event.target.gameid.value,
+                // Multiple betamount by 1,000,000 to convert from TRX to SUN
+                event.target.betamount.value * 1_000_000
+            );
+            window.location.reload();
+        } catch {
+            alert('Your bet has not gone through!');
+        }
 	}
 
 	async determineGames() {
